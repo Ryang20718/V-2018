@@ -10,3 +10,7 @@ $.getJSON('https://ipapi.co/json/', function(data) {
   });
   
   
+/*More Accurate Geo-Location*/
+$.getJSON( '//ipinfo.io/json', function( data ) {
+console.log( data.city + " " + data.postal);
+});
