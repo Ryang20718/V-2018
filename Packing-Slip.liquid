@@ -1,0 +1,94 @@
+
+
+<div style="background-color: #999999; text-align: center;"><span style="color: #ffffff;">Packing Slip</span></div>
+
+  {{ shop.city }}<br/>
+  {{ shop.city }}, {{ shop.province_code }} {{ shop.zip | upcase }}<br/>
+
+<p style="padding: 1.5em; float: left; text-align: left; margin: 0;padding-right:1px;">
+Ship To : 
+</p>
+
+
+<p style="padding: 1.5em; float: left; text-align: left; margin: 0;">
+
+    {% if shipping_address %}
+  <strong>{{ shipping_address.name }}</strong><br/>
+  {% if shipping_address.company %}
+    {{ shipping_address.company }}<br/>
+  {% endif %}
+  {{ shipping_address.street }}<br/>
+  {{ shipping_address.city }} {{ shipping_address.province_code }} {{ shipping_address.zip | upcase }}<br/>
+  {{ shipping_address.country }}
+{% endif %}
+
+</p>
+
+<p style="padding: 1.5em; float: right; text-align: left; margin: 0;padding-left:0px">
+  <strong>Date : </strong>{{ "now" | date: "%m/%d/%y" }}<br />
+  <strong>Order : </strong>{{ order_name }}<br />
+  <strong>Customer : </strong>{{customer.name}}<br />
+  <strong>Ship Date : </strong>{{ "now" | date: "%m/%d/%y" }}
+  
+</p>
+
+<table class="table-tabular" style="margin: 0 0 1.5em 0;">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Ext. Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for line_item in line_items %}
+      <tr>
+        <td>{{ line_item.sku }} </td>
+        <td><b>{{ line_item.title }}</b></td>
+        <td>{{ line_item.price | money }}</td>
+        <td> {{ line_item.quantity }} x</td>
+        <td> {{ total_price | money }} </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<table class="table-tabular" style="margin: 0 0 1.5em 0;">
+  <tr>
+    <td>Subtotal price:</td>
+    <td>{{ subtotal_price | money }}</td>
+  </tr>
+    <tr>
+      <td>Shipping:</td>
+      <td>{{ shipping_price | money }}</td>
+    </tr>
+  {% for discount in discounts %}
+  <tr>
+    <td>Includes discount "{{ discount.code }}"</td>
+    <td>{{ discount.savings | money }}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <td>Total tax:</td>
+    <td>{{ tax_price | money }}</td>
+  </tr>
+
+
+
+  <tr>
+    <td><strong>Total price:</strong></td>
+    <td><strong>{{ total_price | money }}</strong></td>
+  </tr>
+  {% if total_paid != total_price %}
+    <tr>
+      <td><strong>Total paid:</strong></td>
+      <td><strong>{{ total_paid | money }}</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Outstanding Amount:</strong></td>
+      <td><strong>{{ total_price | minus: total_paid | money }}</strong></td>
+    </tr>
+  {% endif %}
+</table>
