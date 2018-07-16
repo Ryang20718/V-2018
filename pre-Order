@@ -53,3 +53,7 @@ $(".single-option-selector").change(function() {
 
 
 </script>
+
+//right now pre-order feature is in 
+//theme.js for button change
+//<script>console.log("{{product.id}}")</script> to find the product id
