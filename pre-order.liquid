@@ -22,15 +22,14 @@
 }
 {% endschema %}
 
+{% assign arrayOfProdID = "" %}
 
-{% assign index = 0 %}
-{% assign array = all_products[blocks.settings.productLink] %}
+
 
 {% for block in section.blocks %}
   {% case block.type %}
     {% when 'info' %}
-<p>{{array}}</p>
-  <a href="/products/{{block.settings.productLink}}">h1</a>
+		{% assign arrayOfProdID = arrayOfProdID | append: '-' | append: all_products[block.settings.productLink].id %}
   {% endcase %}
 {% endfor %}
 
