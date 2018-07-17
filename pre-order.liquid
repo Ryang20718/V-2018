@@ -1,0 +1,56 @@
+{% schema %}
+{
+"blocks":[
+{
+"type":"info",
+"name":"Pre-Order Products",
+"settings":[
+{
+"type":"text",
+"id":"ETA-month",
+"label":"ETA-Month",
+"placeholder":"08"
+},
+{
+"type":"text",
+"id":"ETA-day",
+"label":"ETA-Day",
+"placeholder":"20"
+},
+{
+"type":"text",
+"id":"ETA-year",
+"label":"ETA-Year",
+"placeholder":"2018"
+},
+	  {
+        "type": "product",
+        "id": "productLink",
+        "label": "Product Link"
+      }
+]
+}
+]
+}
+{% endschema %}
+
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'info' %}
+  <a href="/products/{{block.settings.productLink}}">h1</a>
+  {% endcase %}
+{% endfor %}
+
+
+
+
+
+{% stylesheet %}
+
+
+{% endstylesheet %}
+
+{% javascript %}
+console.log("/products/{{block.settings.productLink}}");
+{% endjavascript %}
