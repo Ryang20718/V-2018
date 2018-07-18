@@ -1,0 +1,37 @@
+{% for index in collections.Pre-Order.products %}
+	{% if product.id == index.id %}   
+	<form onsubmit="return false">
+       <a ><input onclick = "email()" type="button" id = "Pre-Order" class="{{btn_class }}" value="Email Me When In Stock"></a>
+    </form>
+    {% endif %}
+{% endfor %}
+
+<head>
+
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_EMtohVhlj5XGWoYiN67eK");
+   })();
+</script>
+</head>
+
+
+
+<script>
+  function email(){
+var templateParams = {
+    name: 'James',
+    notes: 'Check this out!'
+};
+ 
+emailjs.send('gmail', 'template_dnN7EqlU', templateParams)
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
+  }
+
+
+</script>
