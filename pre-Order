@@ -57,3 +57,5 @@ $(".single-option-selector").change(function() {
 //right now pre-order feature is in 
 //theme.js for button change
 //product-grid-item.liquid <script>console.log("{{product.id}}")</script> to find the product id
+//pre-order.liquid
+//
