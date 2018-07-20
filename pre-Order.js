@@ -51,3 +51,17 @@ $("select[value='selector']").change(function() {
             }
 });
 */
+/*
+ajax
+*/
+    $.ajax({
+        type: 'GET',
+        url: '/products.json',
+        dataType: 'json',
+        success: function(res){
+            console.log(res);
+        },
+        error: function(status){
+             alert(status);
+        }
+    })
