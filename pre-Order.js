@@ -101,3 +101,27 @@ ajax
         }
     })  
     */
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://vesselbags.com/collections/pre-order/products.json',
+        dataType: 'json',
+        success: function(product){
+          for(var index = 0; index < Object.keys(product.products).length; index++){//loop through all variant id
+            for(var index2 = 0; index2 < Object.keys(product.products[index].variants).length; index2++){
+              if(variant.id == product.products[index].variants[index2].id){
+                preOrder = true;
+              }
+            }
+          }
+
+        },
+        error: function(status){
+             console.log("error cannot find any pre-order products");
+        },
+        async: false
+    });   
+     if(preOrder){//checks if object is supposed to be in preorder
+          this.settings.selectors.$addToCartText.html({{ 'products.product.Pre_Order' | t | json }});
+       }
+/*
