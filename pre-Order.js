@@ -125,3 +125,17 @@ ajax
           this.settings.selectors.$addToCartText.html({{ 'products.product.Pre_Order' | t | json }});
        }
 /*
+product-template
+        {% for variant in product.variants %}
+        <div style= "display:none" id = "variant_inventory">{{variant.inventory_quantity}}</div><!-- For countig variant inventory -->
+        {% endfor %}  
+
+
+theme.js
+		  var num_quantity = document.getElementById('variant_inventory').innerHTML;
+          console.log(num_quantity);
+      	  if(num_quantity < 1){
+            this.settings.selectors.$addToCartText.html({{ 'products.product.Pre_Order' | t | json }});
+            this.settings.selectors.$addToCart.addClass('disabled').prop('disabled', true);
+      	  }
+*/

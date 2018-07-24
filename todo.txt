@@ -1,3 +1,0 @@
-//shopify email app nodejs/ serverless amazon
-//shopify pre-order app 
-//shopifyfd

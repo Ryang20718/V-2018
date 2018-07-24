@@ -1,0 +1,6 @@
+//shopify email app nodejs/ serverless amazon
+//shopify pre-order app 
+//shopifyfd
+
+//learned proxying, Cors,client vs server
+//html button can use post form action => <form action="/action_page.php" method="get">
