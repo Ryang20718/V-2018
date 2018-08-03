@@ -139,3 +139,11 @@ theme.js
             this.settings.selectors.$addToCart.addClass('disabled').prop('disabled', true);
       	  }
 */
+//Synch Ajax
+    $.ajax({
+        type: 'GET',
+        url: 'https://inventory-shop-oauth.herokuapp.com/getData',
+        dataType: 'json',
+    }).done(function(data){
+        preOrderArray = data;
+	});
