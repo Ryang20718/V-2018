@@ -147,3 +147,13 @@ theme.js
     }).done(function(data){
         preOrderArray = data;
 	});
+//synch ajax
+       $.ajax({
+            url: "https://inventory-shop-oauth.herokuapp.com/getData",
+            type: 'GET',
+         	async:false,
+            success: function(res) {
+                preOrderArray = res;
+            }
+        });
+      
