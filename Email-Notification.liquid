@@ -1,0 +1,10 @@
+{% comment %}
+Holds all the metafields for the pre-order metafields
+{% endcomment %}
+{{line_item.variant.inventory_quantity}}
+{% for line in line_items %}
+{% for variant in line.product.variants %}
+{{variant.metafields.Pre.Order}}
+{% endfor %}
+{{line.product.metafields.Pre.Order}}
+{% endfor %}
