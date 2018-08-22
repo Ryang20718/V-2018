@@ -1,0 +1,149 @@
+     
+  <script>
+    //snippet for the preOrderNotification pop up
+   function on() {
+   $("#text").removeClass("hide");
+    document.getElementById("overlay").style.display = "block";
+   setTimeout(delayAdd, 100);
+	}
+  function delayAdd(){
+    $("#overlay").addClass("modalIn");
+  }
+
+  $(function(){				
+				
+				var $win = $(window); // or $box parent container
+				var $box = $("#text");
+
+				 $win.on("click.Bst", function(event){	
+                       if(	$("#overlay").hasClass("modalIn")){//checks if modal is in
+					if ( 
+            $box.has(event.target).length == 0 //checks if descendants of $box was clicked
+            &&
+            !$box.is(event.target) //checks if the $box itself was clicked
+          ){//clicked outside the div modal
+            $("#overlay").removeClass("modalIn");
+            document.getElementById("overlay").style.display = "none";
+					} else {
+             //clicked inside the div modal
+					}
+                   }
+				});
+  
+});    
+          
+          
+          
+  
+  //test functions for firebase
+          //scripts          
+function addMailChimp(receiver_email){//add customer to pre-order database 
+$.ajax({
+	url: "https://inventory-shop-oauth.herokuapp.com/signup",
+	type: "POST",
+	dataType: "json",
+    data:{"email":receiver_email},
+	crossDomain: true
+});
+  }
+  
+function addOldCustomer(receiver_email,pUrl,vId){//add customer to pre-order database
+$.ajax({
+	url: "https://inventory-shop-oauth.herokuapp.com/updatePreOrderCustomers",
+	type: "POST",
+	dataType: "json",
+    data:{"email":receiver_email, "url": pUrl,"variantID": vId},
+	crossDomain: true
+});
+  }
+  
+  function addNewCustomer(pUrl,vId){//add customer to pre-order database
+$.ajax({
+	url: "https://inventory-shop-oauth.herokuapp.com/updatePreOrderCustomers",
+	type: "POST",
+	dataType: "json",
+    data:{"email":document.getElementById('contactFormEmail').value, "url": pUrl,"variantID": vId},
+	crossDomain: true
+});
+  }
+  
+  
+  //script for Pre-Order Email
+  function preOrder(receiver_email,receiver_message){
+    if($('input[name="subscribeCheck"]:checked').length > 0){//returns true if user wants to sign up for mailchimp
+      addMailChimp(receiver_email);
+    }
+    
+   addOldCustomer(receiver_email,'{{product.title}} {{product.selected_or_first_available_variant.title}}',{{product.selected_or_first_available_variant.id}}); 
+$.ajax({
+	url: "https://preorder-app.herokuapp.com/email",
+	type: "POST",
+	dataType: "json",
+    data:{"email":receiver_email, "message": receiver_message},
+	crossDomain: true
+});
+
+    document.getElementById("overlay").style.display = "none";
+    alert("Thank you for your interest");
+  }
+  
+  
+  
+function preOrderNewCustomer(receiver_message){
+      if($('input[name="subscribeCheck"]:checked').length > 0){//checks if user wants to sign up for mailchimp
+      addMailChimp(document.getElementById('contactFormEmail').value);  
+      }
+          
+      if(document.getElementById('contactFormEmail').value == ""){
+        alert("Please Fill in Your Email");
+        return;
+      }
+      addNewCustomer( '{{product.title}} {{product.selected_or_first_available_variant.title}}',{{product.selected_or_first_available_variant.id}});
+$.ajax({
+	url: "https://preorder-app.herokuapp.com/email",
+	type: "POST",
+	dataType: "json",
+    data:{"email":document.getElementById('contactFormEmail').value, "message": receiver_message},
+	crossDomain: true
+});
+  document.getElementById("overlay").style.display = "none";
+    alert("Thank you for your interest");
+  }
+  
+        </script>
+        
+        
+        
+        
+        
+    <!-- Modal-->
+        <a id = "Pre-Order" class = "addToCartCustom hide" onclick = "on()">Notify Me</a>
+      
+  <div id="overlay" >
+  <div id="text" >
+
+        <div id="contactFormWrapper">
+          <h1 id = "modal-title">Notify Me</h1>
+          
+          <div class="contactPreOrder">
+          <label for="contactFormEmail" class="hidden-label">{{ 'contact.form.email' | t }}</label>
+          <input type="email" id="contactFormEmail" placeholder="{{ 'contact.form.email' | t }}" >
+          </div>
+          
+          <div id = "modalCheck" class="contactPreOrder">
+          <input name = "subscribeCheck" type="checkbox" style = "color:black;"> Subscribe to Newsletter <br>
+          </div>
+          
+        {% if customer %}<!-- logged in as customer-->
+          <script>
+            document.getElementById('contactFormEmail').value = '{{customer.email}}';
+          </script>
+          <a id = "preOrderSub" class = "btn" onclick = "preOrder('{{customer.email}}','{{product.metafields.Pre.Order}}')">Notify Me</a>
+        {% else %}<!-- not logged in -->
+          <a id = "preOrderSub" class = "btn" onclick = "preOrderNewCustomer('{{product.metafields.Pre.Order}}')">Notify Me</a>                                                                                                               
+         {% endif %} 
+      </div>
+
+
+    </div>
+</div>
