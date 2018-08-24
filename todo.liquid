@@ -1,0 +1,23 @@
+product-template
+
+        <!-- place to include custom ETA properties -->
+        <p class="line-item-property__field hide">
+		<input required id="monogram" style="display:none;" type="text" name="properties[Monogram]">
+		</p>
+        
+        
+        
+     <!-- Find a way to insert metafields ETA data into the properties(line item)-->   
+        
+cart.liquid
+<!-- Properties -->
+{% for p in item.properties %}
+{% if property_size > 0 %}
+<p>
+{{ p.first }}
+{{ p.last }}
+</p>
+<br>
+{% endif %}
+{% endfor %}
+<!-- Cart.liquid, product-template, theme.js,product-preorder-template,preOrderNotification--> 
