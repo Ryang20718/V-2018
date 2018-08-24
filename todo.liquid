@@ -21,4 +21,19 @@ cart.liquid
 {% endif %}
 {% endfor %}
 
+
+{% unless line_item.properties == empty %}
+<ul>
+  {% for property in line_item.properties %}
+  <li>{{ property.first }}: {{ property.last }}</li>
+  {% endfor %}
+</ul>
+{% endunless %}
+
+
+              <script>
+                
+                console.log('{{item.properties.ETA}}');// how to access the properties
+              </script>
+
 <!-- Cart.liquid, product-template, theme.js,product-preorder-template,preOrderNotification--> 

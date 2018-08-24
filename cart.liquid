@@ -1,0 +1,18 @@
+  {% if item.variant.inventory_quantity < 1 %} 
+    {% if item.variant.metafields.Pre.Order == blank %}    <!--checks if product message is blank -->
+<script>
+$.ajax({
+	url: "https://inventory-shop-oauth.herokuapp.com/cartCheckMsg",
+	type: "POST",
+	dataType: "json",
+    data:{"prodID":{{item.product.id}}, "varID": {{item.variant.id}}},
+	crossDomain: true
+});
+</script>                
+    {% else %}    
+              <!--  
+    <div id = "ETA">
+    	<textarea readonly id = "ETA-text">{{ item.variant.metafields.Pre.Order }}</textarea>
+    </div>  -->
+	{% endif %} 
+  {% endif %}  
