@@ -4,6 +4,7 @@
    function on() {
    $("#text").removeClass("hide");
     document.getElementById("overlay").style.display = "block";
+    document.getElementById("text").style.display = "block";
    setTimeout(delayAdd, 100);
 	}
   function delayAdd(){
@@ -119,8 +120,8 @@ $.ajax({
     <!-- Modal-->
         <a id = "Pre-Order" class = "addToCartCustom hide" onclick = "on()">Notify Me</a>
       
-  <div id="overlay" >
-  <div id="text" >
+  <div id="overlay" style = "display:none;">
+  <div id="text" style = "display:none">
 
         <div id="contactFormWrapper">
           <h1 id = "modal-title">Notify Me</h1>
