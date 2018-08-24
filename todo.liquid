@@ -10,7 +10,7 @@ product-template
      <!-- Find a way to insert metafields ETA data into the properties(line item)-->   
         
 cart.liquid
-<!-- Properties -->
+<!-- Properties for testing out if the line_item properties works for metafields-->
 {% for p in item.properties %}
 {% if property_size > 0 %}
 <p>
@@ -20,4 +20,5 @@ cart.liquid
 <br>
 {% endif %}
 {% endfor %}
+
 <!-- Cart.liquid, product-template, theme.js,product-preorder-template,preOrderNotification--> 
