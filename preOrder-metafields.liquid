@@ -1,0 +1,8 @@
+		<!-- Place for metafields ETA text for preOrder Products -->
+        {% for variant in product.variants %}
+        <p style = "display:none" id = "metafields-{{variant.id}}">{{variant.metafields.Pre.Order}}</p>	
+		{% endfor %}
+        <!-- place to include custom ETA properties -->
+        <p class="line-item-property__field hide">
+		<input required id="PreOrder-ETA"  type="text" name="properties[PreOrder-ETA]">
+		</p>
