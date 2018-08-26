@@ -1,7 +1,8 @@
      
   <script>
     //snippet for the preOrderNotification pop up
-   function on() {
+   function modalTurnOn() {
+   $("#overlay").removeClass("hide");
    $("#text").removeClass("hide");
     document.getElementById("overlay").style.display = "block";
     document.getElementById("text").style.display = "block";
@@ -11,8 +12,8 @@
     $("#overlay").addClass("modalIn");
   }
 
-  $(function(){				
-				
+  $(function(){		
+    			
 				var $win = $(window); // or $box parent container
 				var $box = $("#text");
 
@@ -33,9 +34,6 @@
   
 });    
           
-          
-          
-  
   //test functions for firebase
           //scripts          
 function addMailChimp(receiver_email){//add customer to pre-order database 
@@ -116,12 +114,11 @@ $.ajax({
         
         
         
-        
     <!-- Modal-->
-        <a id = "Pre-Order" class = "addToCartCustom hide" onclick = "on()">Notify Me</a>
+        <a id = "Pre-Order" class = "addToCartCustom hide" onclick = "modalTurnOn()">Notify Me</a>
       
-  <div id="overlay" style = "display:none;">
-  <div id="text" style = "display:none">
+  <div id="overlay" style = "display:none;" class = "hide">
+  <div id="text" style = "display:none;"class = "hide" >
 
         <div id="contactFormWrapper">
           <h1 id = "modal-title">Notify Me</h1>
@@ -148,3 +145,4 @@ $.ajax({
 
     </div>
 </div>
+
