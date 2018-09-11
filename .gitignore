@@ -1,1 +1,3 @@
 theme.js.liquid
+themeAsynchronous.js.liquid
+themeSynchronous.js.liquid
